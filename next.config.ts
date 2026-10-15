@@ -34,6 +34,8 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  // Lets a phone on the same Wi-Fi load the dev server (http://192.168.100.243:3230). Dev only.
+  allowedDevOrigins: ["192.168.100.243"],
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },
