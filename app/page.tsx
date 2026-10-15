@@ -1,7 +1,6 @@
 import { AuditOverlay } from "@/components/audit/AuditOverlay";
 import { Footer } from "@/components/legal/Footer";
 import { Reveal } from "@/components/motion/Reveal";
-import { BeforeAfter } from "@/components/sections/BeforeAfter";
 import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { Hero } from "@/components/sections/Hero";
@@ -20,7 +19,6 @@ export default function Home() {
           <Hero />
           <WhatWeBuild />
           <WhyItMatters />
-          <BeforeAfter />
           <Packages />
           <HowItWorks />
           <Faq />

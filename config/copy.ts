@@ -51,11 +51,6 @@ export const COPY = {
     statement: "Careers are short, and the name outlasts them. Your record shows what you can do. Your brand decides who hears about it.",
     cta: "How the audit works",
   },
-  beforeAfter: {
-    eyebrow: "Before and after",
-    h2: "Same athlete. Different first impression.",
-    note: "A stock photo of a fighter, shown as a flat phone snap and as a pro profile shot. The kind of change we make.",
-  },
   packages: {
     eyebrow: "Packages",
     h2: "Pick the gap you want closed.",

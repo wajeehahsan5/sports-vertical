@@ -5,7 +5,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 export function HowItWorks() {
   const h = COPY.how;
   return (
-    <section id="how" className="mx-auto max-w-[1240px] scroll-mt-4 px-4 pb-24 sm:px-6 lg:pb-32">
+    <section id="how" className="mx-auto max-w-[1240px] scroll-mt-4 px-4 py-24 sm:px-6 lg:py-32">
       <Eyebrow>{h.eyebrow}</Eyebrow>
       <h2 className="display mt-4 text-[clamp(36px,4.2vw,56px)]">{h.h2}</h2>
       <ol className="mt-12 grid gap-4 md:grid-cols-3">
