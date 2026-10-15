@@ -47,8 +47,7 @@ export function readAttribution(): Record<string, string> {
   try {
     const stored = JSON.parse(localStorage.getItem(KEY) || "null") as Attribution | null;
     if (!stored || Date.now() - stored.first_seen >= TTL_MS) return {};
-    const { first_seen: _t, ...rest } = stored;
-    return rest as Record<string, string>;
+    return Object.fromEntries(Object.entries(stored).filter(([k]) => k !== "first_seen")) as Record<string, string>;
   } catch {
     return {};
   }
