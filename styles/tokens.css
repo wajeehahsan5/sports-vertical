@@ -1,28 +1,30 @@
 /*
- * Janobi Sports — design tokens (reference: janobi-sports/design/reference.webp).
- * Every colour on the site traces back to this file.
+ * Janobi Sports — design tokens. Dark, fight-night feel on the reference's bento layout
+ * (janobi-sports/design/reference.webp). Every colour on the site traces back to this file.
  */
 :root {
-  --paper: #f3f0e8; /* cream bands */
-  --card: #faf8f2; /* soft cream cards on paper, as in the reference */
-  --ink: #161616; /* type, dark bands */
-  --ink-2: #1f1f1f; /* cards on dark bands */
+  /* grounds */
+  --bg: #0a0a0a; /* page */
+  --bg-2: #101010; /* alternate bands (with the cage texture) */
+  --surface: #161616; /* cards */
+  --surface-2: #1e1e1e; /* raised bits inside cards, inputs */
+
+  /* type */
+  --fg: #f2f0ea; /* headlines and strong text */
+  --fg-body: #c9c7c0; /* paragraphs */
+  --fg-dim: #8f8e88; /* labels, meta */
+  --ink: #0a0a0a; /* type on mint and on white chips */
+
+  /* brand */
   --mint: #9beaca; /* the loud accent: highlight cards, arrows, selected answers */
   --mint-deep: #7fe0b9;
-  --magenta: #cc1d9a; /* the one pop card per section, never body text */
-  --line: rgba(22, 22, 22, 0.12);
-  --line-dark: rgba(255, 255, 255, 0.12);
-  --dim: #6b6b66;
-  --body: #2a2a28;
-  --on-dark: #edede8;
-  --on-dark-dim: #a3a39e;
-  --error: #d6452f;
+  --magenta: #cc1d9a; /* one pop per section: tags, Concept labels */
+
+  --line: rgba(255, 255, 255, 0.09);
+  --line-strong: rgba(255, 255, 255, 0.18);
+  --error: #ff6b57;
 
   --radius-card: 14px;
   --radius-field: 12px;
-  --content-max: 1200px;
-
-  /* names the Cal.com theme reads */
-  --surface: var(--mint-deep);
-  --sand: #e6e2d8;
+  --content-max: 1240px;
 }

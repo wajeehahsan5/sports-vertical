@@ -27,7 +27,7 @@ export default function OutcomeForm({ id, token }: { id: string; token: string }
   return (
     <div className="flex flex-col gap-3">
       {CHOICES.map((c) => (
-        <button key={c.value} type="button" className="btn btn-light justify-start" onClick={() => log(c.value)}>
+        <button key={c.value} type="button" className="btn btn-ghost justify-start" onClick={() => log(c.value)}>
           {c.label}
         </button>
       ))}

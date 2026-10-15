@@ -1,21 +1,25 @@
 import type { Metadata, Viewport } from "next";
-import { Barlow_Condensed, DM_Sans } from "next/font/google";
+import { Big_Shoulders } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-// Headline face: Wajeeh's pick from design/font-board.html (Barlow Condensed until he says otherwise).
-const display = Barlow_Condensed({
+// Headline face: Wajeeh's pick from design/font-board.html (the right one, Big Shoulders).
+const display = Big_Shoulders({
   variable: "--font-display-face",
   subsets: ["latin"],
   weight: ["700", "800"],
   display: "swap",
 });
 
-// Body: DM Sans until the Lab Grotesque web licence is confirmed (then swap to next/font/local).
-const body = DM_Sans({
+// Body: Janobi's own Lab Grotesque (web licence confirmed by Wajeeh, 2026-10-16).
+const body = localFont({
   variable: "--font-body-face",
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
   display: "swap",
+  src: [
+    { path: "./fonts/LabGrotesque-Regular.ttf", weight: "400", style: "normal" },
+    { path: "./fonts/LabGrotesque-Medium.ttf", weight: "500", style: "normal" },
+    { path: "./fonts/LabGrotesque-Bold.ttf", weight: "700", style: "normal" },
+  ],
 });
 
 export const metadata: Metadata = {

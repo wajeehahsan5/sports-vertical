@@ -34,7 +34,7 @@ export function ReviewStep({
       }}
     >
       <fieldset>
-        <legend className="text-[16px] font-medium text-body">Where are you based?</legend>
+        <legend className="text-[16px] font-medium text-fg-body">Where are you based?</legend>
         <div className="mt-2 flex flex-wrap gap-2">
           {BASED_IN.map((b) => (
             <button
@@ -45,7 +45,7 @@ export function ReviewStep({
                 setBasedIn(b.value);
                 setMissing(false);
               }}
-              className={`btn ${basedIn === b.value ? "btn-mint" : "btn-light"}`}
+              className={`btn ${basedIn === b.value ? "btn-mint" : "btn-ghost"}`}
             >
               {b.label}
             </button>

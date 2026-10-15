@@ -14,7 +14,7 @@ import { formatWhen } from "./when";
 // The Cal.com embed only loads at the last step, keeping it off the page's first paint.
 const BookingStep = dynamic(() => import("./BookingStep"), {
   ssr: false,
-  loading: () => <div className="card grid min-h-[420px] place-items-center text-dim">Loading the calendar…</div>,
+  loading: () => <div className="card grid min-h-[420px] place-items-center text-fg-dim">Loading the calendar…</div>,
 });
 
 // Screens: 0 sport · 1 level · 2–10 questions · 11 results · 12 review · 13 booking
@@ -191,7 +191,7 @@ export function Audit({ onClose }: { onClose: () => void }) {
     label = "Audit";
     title = "Let's start again.";
     stage = (
-      <button type="button" className="btn btn-ink" onClick={() => goto(0)}>
+      <button type="button" className="btn btn-mint" onClick={() => goto(0)}>
         Start again
       </button>
     );
@@ -202,7 +202,7 @@ export function Audit({ onClose }: { onClose: () => void }) {
   return (
     <div className="mx-auto w-full max-w-[880px] px-4 pb-12 pt-5 sm:px-6">
       <div className="flex items-center gap-4">
-        <div className="h-[6px] flex-1 rounded-full bg-card" aria-hidden="true">
+        <div className="h-[6px] flex-1 rounded-full bg-surface" aria-hidden="true">
           <div className="h-full rounded-full bg-mint transition-[width] duration-300" style={{ width: `${pct}%` }} />
         </div>
         <button type="button" onClick={onClose} aria-label="Close the audit" className="btn-arrow">
@@ -210,9 +210,9 @@ export function Audit({ onClose }: { onClose: () => void }) {
         </button>
       </div>
       <div className="mt-6 flex min-h-[44px] items-center justify-between gap-4">
-        <p className="label text-dim">{label}</p>
+        <p className="label text-fg-dim">{label}</p>
         {!s.booking && s.step > 0 ? (
-          <button type="button" onClick={() => goto(s.step - 1)} className="label min-h-[44px] px-2 text-dim hover:text-ink">
+          <button type="button" onClick={() => goto(s.step - 1)} className="label min-h-[44px] px-2 text-fg-dim hover:text-fg">
             ← Back
           </button>
         ) : null}
@@ -220,7 +220,7 @@ export function Audit({ onClose }: { onClose: () => void }) {
       <h2 id="audit-title" ref={titleRef} tabIndex={-1} className="display mt-2 text-[clamp(34px,6vw,60px)] [text-wrap:balance] focus:outline-none">
         {title}
       </h2>
-      {sub ? <p className="mt-3 max-w-[56ch] text-[17px] leading-relaxed text-body">{sub}</p> : null}
+      {sub ? <p className="mt-3 max-w-[56ch] text-[17px] leading-relaxed text-fg-body">{sub}</p> : null}
       <div className="mt-8">{stage}</div>
     </div>
   );

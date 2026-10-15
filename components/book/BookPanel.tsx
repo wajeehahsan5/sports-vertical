@@ -25,9 +25,9 @@ export default function BookPanel(props: { leadId: string; name: string; email: 
   if (booking) {
     return (
       <div className="card p-6 sm:p-8">
-        <p className="label text-dim">Booked</p>
+        <p className="label text-fg-dim">Booked</p>
         <p className="display mt-2 text-[clamp(28px,5vw,40px)]">{formatWhen(booking.startTime)}</p>
-        <p className="mt-3 text-[17px] text-body">
+        <p className="mt-3 text-[17px] text-fg-body">
           The invite is on its way. Before the call we go through your profiles and bring 3 fixes.
         </p>
       </div>

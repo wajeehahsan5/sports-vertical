@@ -84,7 +84,7 @@ export function AuditOverlay() {
       aria-modal="true"
       aria-labelledby="audit-title"
       hidden={!open}
-      className="quiz-in fixed inset-0 z-50 overflow-y-auto overscroll-contain bg-paper"
+      className="quiz-in fixed inset-0 z-50 overflow-y-auto overscroll-contain bg-bg"
     >
       <Audit onClose={hide} />
     </div>

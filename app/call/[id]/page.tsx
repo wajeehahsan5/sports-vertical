@@ -21,9 +21,9 @@ export default async function CallPage({ params, searchParams }: { params: Promi
   if (!lead) notFound();
   return (
     <main className="mx-auto max-w-[620px] px-4 pb-16 pt-10">
-      <p className="label text-dim">After the call</p>
+      <p className="label text-fg-dim">After the call</p>
       <h1 className="display mt-2 text-[48px]">{lead.name}</h1>
-      <p className="mt-2 text-dim">
+      <p className="mt-2 text-fg-dim">
         @{lead.instagram} · {lead.email} · now: {lead.status}
       </p>
       <div className="mt-8">

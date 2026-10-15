@@ -17,10 +17,11 @@ export const COPY = {
     cta: "Get my free audit",
     ctaLabel: ["Get your free", "brand audit"] as const,
     images: [
-      { src: "/img/hero-1.jpg", alt: "A fighter shadowboxing in a dim gym" },
-      { src: "/img/hero-2.jpg", alt: "A boxer with gloves up, looking into the camera" },
-      { src: "/img/hero-3.jpg", alt: "A footballer on an empty pitch at dusk" },
+      { src: "/img/hero-1.jpg", alt: "A fighter in MMA gloves, guard up, on a black background" },
+      { src: "/img/hero-2.jpg", alt: "A fighter in boxing gloves inside a cage" },
+      { src: "/img/hero-3.jpg", alt: "A fighter in MMA gloves looking into the camera" },
     ],
+    avatars: ["/img/avatar-1.jpg", "/img/avatar-2.jpg", "/img/avatar-3.jpg"],
   },
   build: {
     eyebrow: "What we build",
@@ -28,7 +29,7 @@ export const COPY = {
     cta: "Get my free audit",
     photo: {
       src: "/img/build.jpg",
-      alt: "An athlete taping their wrists, phone on the bench",
+      alt: "A fighter taping his hands before training",
       place: "Built around your real training week",
       title: "Sponsors check first",
       body: "Before a brand backs you, they look you up. Your profile does the talking before you do.",
@@ -41,7 +42,7 @@ export const COPY = {
     audit: { title: "Start with the audit", body: "2 minutes, free. See which of the three needs work first." },
   },
   why: {
-    photo: { src: "/img/why.jpg", alt: "A fighter on gym steps after training, checking his phone" },
+    photo: { src: "/img/why.jpg", alt: "A fighter sitting on the gym floor beside his gloves" },
     stats: [
       ["2 min", "to take the audit"],
       ["3", "pillars we score"],
@@ -53,7 +54,7 @@ export const COPY = {
   beforeAfter: {
     eyebrow: "Before and after",
     h2: "Same athlete. Different first impression.",
-    note: "A fictional athlete, made to show the kind of change we make.",
+    note: "A stock photo of a fighter, shown as a flat phone snap and as a pro profile shot. The kind of change we make.",
   },
   packages: {
     eyebrow: "Packages",

@@ -51,22 +51,22 @@ export default function BookingStep({
       const css = getComputedStyle(document.documentElement);
       const t = (v: string) => css.getPropertyValue(v).trim();
       cal("ui", {
-        theme: "light",
+        theme: "dark",
         layout: "month_view",
         hideEventTypeDetails: true,
         cssVarsPerTheme: {
-          light: {
-            "cal-brand": t("--ink"),
-            "cal-brand-emphasis": t("--ink-2"),
-            "cal-brand-text": t("--mint"),
-            "cal-text": t("--ink"),
-            "cal-text-emphasis": t("--ink"),
-            "cal-text-subtle": t("--dim"),
-            "cal-bg": t("--card"),
-            "cal-bg-emphasis": t("--paper"),
-            "cal-bg-subtle": t("--paper"),
-            "cal-border": t("--line"),
-            "cal-border-subtle": t("--sand"),
+          dark: {
+            "cal-brand": t("--mint"),
+            "cal-brand-emphasis": t("--mint-deep"),
+            "cal-brand-text": t("--ink"),
+            "cal-text": t("--fg"),
+            "cal-text-emphasis": t("--fg"),
+            "cal-text-subtle": t("--fg-dim"),
+            "cal-bg": t("--surface"),
+            "cal-bg-emphasis": t("--surface-2"),
+            "cal-bg-subtle": t("--bg"),
+            "cal-border": t("--line-strong"),
+            "cal-border-subtle": t("--line"),
           },
         },
       });
@@ -81,16 +81,16 @@ export default function BookingStep({
 
   if (!calLink) {
     return (
-      <div className="rounded-[14px] border border-dashed border-line bg-card p-6">
-        <p className="label text-dim">TODO · Cal.com not connected</p>
-        <p className="mt-2 text-[16px] text-body">
+      <div className="rounded-[14px] border border-dashed border-line bg-surface p-6">
+        <p className="label text-fg-dim">TODO · Cal.com not connected</p>
+        <p className="mt-2 text-[16px] text-fg-body">
           Set <code className="font-semibold">NEXT_PUBLIC_CAL_LINK</code> in <code>.env.local</code> and the booking calendar
           loads here, prefilled with {name || "their name"} and {email || "their email"}.
         </p>
         {process.env.NODE_ENV !== "production" ? (
           <button
             type="button"
-            className="btn btn-ink mt-5"
+            className="btn btn-mint mt-5"
             onClick={() =>
               onBooked({ uid: `dev-${Date.now()}`, startTime: new Date(Date.now() + 3 * 86_400_000).toISOString() })
             }
@@ -103,7 +103,7 @@ export default function BookingStep({
   }
 
   return (
-    <div className="min-h-[560px] overflow-hidden rounded-[14px] border border-line bg-card">
+    <div className="min-h-[560px] overflow-hidden rounded-[14px] border border-line bg-surface">
       <Cal
         namespace={NAMESPACE}
         calLink={calLink}
@@ -113,7 +113,7 @@ export default function BookingStep({
           {
             layout: "month_view",
             useSlotsViewOnSmallScreen: "true",
-            theme: "light",
+            theme: "dark",
             // Everything the audit already asked, so the Cal form is one tap: Confirm.
             name,
             email,

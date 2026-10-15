@@ -1,3 +1,3 @@
-export function Eyebrow({ children, dark = false }: { children: React.ReactNode; dark?: boolean }) {
-  return <p className={`eyebrow ${dark ? "text-mint" : "text-dim"}`}>{children}</p>;
+export function Eyebrow({ children }: { children: React.ReactNode }) {
+  return <p className="eyebrow">{children}</p>;
 }

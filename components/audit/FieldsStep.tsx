@@ -18,7 +18,7 @@ function check(f: Field, raw: string): string | null {
 
 export function ErrorLine({ id, children, alert = false }: { id?: string; children: React.ReactNode; alert?: boolean }) {
   return (
-    <p id={id} role={alert ? "alert" : undefined} className="mt-2 flex items-start gap-2 text-[16px] font-medium text-ink">
+    <p id={id} role={alert ? "alert" : undefined} className="mt-2 flex items-start gap-2 text-[16px] font-medium text-fg">
       <span aria-hidden="true" className="mt-[3px] grid h-[18px] w-[18px] shrink-0 place-items-center rounded-full bg-error text-[12px] font-bold leading-none text-white">
         !
       </span>
@@ -75,9 +75,9 @@ export function FieldsStep({
         const err = errors[f.key];
         return (
           <div key={f.key}>
-            <label htmlFor={id} className="text-[16px] font-medium text-body">
+            <label htmlFor={id} className="text-[16px] font-medium text-fg-body">
               {f.label}
-              {f.required ? null : <span className="font-normal text-dim"> (optional)</span>}
+              {f.required ? null : <span className="font-normal text-fg-dim"> (optional)</span>}
             </label>
             <input
               ref={(el) => {
@@ -117,7 +117,7 @@ export function FieldsStep({
       {serverError ? <ErrorLine alert>{serverError}</ErrorLine> : null}
 
       <div className="mt-2">
-        <button type="submit" disabled={busy} className="btn btn-ink min-h-[56px] px-8 text-[17px]">
+        <button type="submit" disabled={busy} className="btn btn-mint min-h-[56px] px-8 text-[17px]">
           {busy ? "Saving…" : submitLabel} <span aria-hidden="true">→</span>
         </button>
       </div>

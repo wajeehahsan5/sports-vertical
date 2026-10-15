@@ -6,13 +6,13 @@ import { PRIVACY_CONTACT_EMAIL, PRIVACY_UPDATED, RETENTION_MONTHS } from "@/conf
 export const metadata: Metadata = { title: "Privacy | Janobi Sports", robots: { index: false } };
 
 const H = "display mt-10 text-[28px]";
-const P = "mt-3 text-[17px] leading-relaxed text-body";
+const P = "mt-3 text-[17px] leading-relaxed text-fg-body";
 
 export default function PrivacyPage() {
   return (
     <>
       <main className="mx-auto max-w-[720px] px-4 pb-20 pt-8 sm:px-6 sm:pt-14">
-        <Link href="/" className="label inline-flex min-h-[44px] items-center text-dim hover:text-ink">
+        <Link href="/" className="label inline-flex min-h-[44px] items-center text-fg-dim hover:text-fg">
           Janobi Sports
         </Link>
         <h1 className="display mt-4 text-[clamp(40px,7vw,64px)]">Privacy</h1>
@@ -59,7 +59,7 @@ export default function PrivacyPage() {
           Every follow-up email has an unsubscribe link, and you can reply to any email to stop them.
         </p>
 
-        <p className="mt-12 text-[14px] text-dim">Updated {PRIVACY_UPDATED}.</p>
+        <p className="mt-12 text-[14px] text-fg-dim">Updated {PRIVACY_UPDATED}.</p>
       </main>
       <Footer />
     </>

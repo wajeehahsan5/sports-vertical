@@ -57,8 +57,7 @@ export const IconYouTube = ({ className }: P) => (
 );
 
 /** The reference's square icon tile, top-left of every service card. */
-export function IconTile({ children, tone }: { children: React.ReactNode; tone: "on-dark" | "on-mint" | "on-cream" }) {
-  const look =
-    tone === "on-mint" ? "bg-ink text-mint" : tone === "on-dark" ? "border border-line-dark bg-ink-2 text-mint" : "bg-ink text-mint";
+export function IconTile({ children, tone }: { children: React.ReactNode; tone: "on-dark" | "on-mint" }) {
+  const look = tone === "on-mint" ? "bg-ink text-mint" : "border border-line-strong bg-surface-2 text-mint";
   return <span className={`grid h-[52px] w-[52px] place-items-center rounded-[12px] ${look}`}>{children}</span>;
 }

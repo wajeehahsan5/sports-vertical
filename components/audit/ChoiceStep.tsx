@@ -16,11 +16,11 @@ export function ChoiceStep({ options, value, onPick }: { options: Option[]; valu
             aria-checked={on}
             onClick={() => onPick(o.value)}
             className={`card flex min-h-[76px] flex-col items-start justify-center gap-1 px-5 py-4 text-left transition-colors duration-150 ${
-              on ? "border-ink bg-mint" : "hover:border-ink"
+              on ? "border-mint bg-mint text-ink [&_span]:text-ink" : "hover:border-mint"
             }`}
           >
             <span className="text-[19px] font-medium leading-tight">{o.label}</span>
-            {o.hint ? <span className="text-[15px] leading-snug text-dim">{o.hint}</span> : null}
+            {o.hint ? <span className="text-[15px] leading-snug text-fg-dim">{o.hint}</span> : null}
           </button>
         );
       })}
