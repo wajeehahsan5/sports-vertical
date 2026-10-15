@@ -17,7 +17,7 @@ export const COPY = {
     cta: "Get my free audit",
     ctaLabel: ["Get your free", "brand audit"] as const,
     images: [
-      { src: "/img/hero-1.jpg", alt: "A fighter in MMA gloves, guard up, on a black background" },
+      { src: "/img/hero-1.jpg", alt: "A boxer throwing a punch at a heavy bag in a dark gym" },
       { src: "/img/hero-2.jpg", alt: "A fighter in boxing gloves inside a cage" },
       { src: "/img/hero-3.jpg", alt: "A fighter in MMA gloves looking into the camera" },
     ],
