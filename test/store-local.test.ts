@@ -25,12 +25,15 @@ afterEach(async () => {
 });
 
 describe("LocalStore", () => {
-  it("alerts once per audit, even when it is submitted twice", async () => {
+  it("lets exactly one caller claim the alert, even across resubmits", async () => {
     const store = new LocalStore(dir);
     const r = scoreAudit(sub.answers, sub.sport);
-    expect(await store.saveAudit(id, sub, r, meta)).toEqual({ alreadyAlerted: false });
-    await store.markAlerted(id);
-    expect(await store.saveAudit(id, sub, r, meta)).toEqual({ alreadyAlerted: true });
+    expect(await store.exists(id)).toBe(false);
+    await store.saveAudit(id, sub, r, meta);
+    expect(await store.exists(id)).toBe(true);
+    expect(await store.claimAlert(id)).toBe(true);
+    await store.saveAudit(id, sub, r, meta);
+    expect(await store.claimAlert(id)).toBe(false);
   });
 
   it("never downgrades a booked lead on resubmit, and keeps the first ref", async () => {

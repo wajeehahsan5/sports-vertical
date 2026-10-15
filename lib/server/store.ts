@@ -26,8 +26,13 @@ type Meta = { attribution: Record<string, string>; userAgent: string };
 export interface LeadStore {
   kind: "supabase" | "local";
   /** Creates or updates the audit. Never touches status or alerted_at; ref/attribution are set on the first save only. */
-  saveAudit(id: string, s: AuditSubmission, r: AuditResult, meta: Meta): Promise<{ alreadyAlerted: boolean }>;
-  markAlerted(id: string): Promise<void>;
+  saveAudit(id: string, s: AuditSubmission, r: AuditResult, meta: Meta): Promise<void>;
+  exists(id: string): Promise<boolean>;
+  /**
+   * Atomically claims the one-time alert + score email for this lead. True for exactly one caller,
+   * ever, so a resubmit, a race or a failed send never sends twice.
+   */
+  claimAlert(id: string): Promise<boolean>;
   get(id: string): Promise<LeadRow | null>;
   booked(id: string, b: { uid: string; startTime: string }): Promise<void>;
   setStatus(id: string, status: Outcome): Promise<void>;
@@ -77,8 +82,7 @@ class SupabaseStore implements LeadStore {
   }
 
   async saveAudit(id: string, s: AuditSubmission, r: AuditResult, meta: Meta) {
-    const { data: existing, error: readError } = await this.db.from(TABLE).select("alerted_at").eq("id", id).maybeSingle();
-    if (readError) throw readError;
+    const existing = await this.exists(id);
     const { error } = await this.db.from(TABLE).upsert(
       {
         id,
@@ -90,12 +94,25 @@ class SupabaseStore implements LeadStore {
       { onConflict: "id" },
     );
     if (error) throw error;
-    return { alreadyAlerted: Boolean(existing?.alerted_at) };
   }
 
-  async markAlerted(id: string) {
+  async exists(id: string) {
+    const { data, error } = await this.db.from(TABLE).select("id").eq("id", id).maybeSingle();
+    if (error) throw error;
+    return Boolean(data);
+  }
+
+  async claimAlert(id: string) {
     const now = new Date().toISOString();
-    await this.db.from(TABLE).update({ alerted_at: now, updated_at: now }).eq("id", id);
+    // One UPDATE … WHERE alerted_at IS NULL: Postgres lets exactly one request win it.
+    const { data, error } = await this.db
+      .from(TABLE)
+      .update({ alerted_at: now, updated_at: now })
+      .eq("id", id)
+      .is("alerted_at", null)
+      .select("id");
+    if (error) throw error;
+    return (data?.length ?? 0) > 0;
   }
 
   async get(id: string) {
@@ -126,7 +143,7 @@ class SupabaseStore implements LeadStore {
 /** Dev-only: one JSON file per lead. Exported for tests. */
 export class LocalStore implements LeadStore {
   kind = "local" as const;
-  constructor(private root = path.join(process.cwd(), ".local-data", "audits")) {}
+  constructor(private root = process.env.LOCAL_STORE_DIR || path.join(process.cwd(), ".local-data", "audits")) {}
 
   private file(id: string) {
     return path.join(this.root, `${id}.json`);
@@ -153,11 +170,17 @@ export class LocalStore implements LeadStore {
       status: current?.status ?? "audited",
       created_at: current?.created_at ?? new Date().toISOString(),
     });
-    return { alreadyAlerted: Boolean(current?.alerted_at) };
   }
 
-  async markAlerted(id: string) {
+  async exists(id: string) {
+    return Boolean(await this.read(id));
+  }
+
+  async claimAlert(id: string) {
+    const row = await this.read(id);
+    if (!row || row.alerted_at) return false;
     await this.write(id, { alerted_at: new Date().toISOString() });
+    return true;
   }
 
   async get(id: string) {

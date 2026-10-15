@@ -65,3 +65,21 @@ describe("attribution", () => {
     expect(attribution({ ref: "<b>" })).toEqual({});
   });
 });
+
+describe("normalizeHandle on share links (review finding)", () => {
+  const bad = [
+    "youtube.com/channel/UCabc",
+    "youtube.com/c/KaiMercer",
+    "https://youtu.be/abc",
+    "https://vm.tiktok.com/ZMabc/",
+    "instagram.com/stories/kai/123",
+    "linktr.ee/kai",
+  ];
+  it.each(bad)("rejects %s instead of storing a fragment", (raw) => {
+    expect(() => submission({ ...base, contact: { ...base.contact, instagram: raw } })).toThrow(ValidationError);
+  });
+  it("still accepts profile URLs", () => {
+    expect(submission({ ...base, contact: { ...base.contact, instagram: "https://instagram.com/kai.mercer" } }).contact.instagram).toBe("kai.mercer");
+    expect(submission({ ...base, contact: { ...base.contact, youtube: "https://www.youtube.com/@KaiMMA" } }).contact.youtube).toBe("KaiMMA");
+  });
+});

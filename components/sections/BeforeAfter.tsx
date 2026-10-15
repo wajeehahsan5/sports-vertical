@@ -34,11 +34,11 @@ export function BeforeAfter() {
               className="relative grid w-[88%] shrink-0 snap-start grid-cols-2 overflow-hidden rounded-[14px] md:w-[62%] lg:w-[48%]"
             >
               <div className="relative aspect-[4/5]">
-                <Pill side="left">Before</Pill>
+                <Pill side="left">Concept · Before</Pill>
                 <Image src={p.before} alt="" fill sizes="(min-width: 1024px) 300px, 45vw" className="object-cover" />
               </div>
               <div className="relative aspect-[4/5]">
-                <Pill side="right">After</Pill>
+                <Pill side="right">Concept · After</Pill>
                 <Image src={p.after} alt="" fill sizes="(min-width: 1024px) 300px, 45vw" className="object-cover" />
               </div>
             </figure>

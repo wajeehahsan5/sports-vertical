@@ -27,7 +27,8 @@ export default function PrivacyPage() {
           <li>Your name, email and Instagram handle.</li>
           <li>If you give them: your TikTok, YouTube, website and WhatsApp number.</li>
           <li>Where you&apos;re based (UK, US or elsewhere).</li>
-          <li>How you found the page, if the link you used had a referral code or campaign tag in it.</li>
+          <li>How you found the page, if the link you used had a referral code or campaign tag in it. Your browser keeps that code for up to 90 days so a later visit still counts.</li>
+          <li>Your browser type (the user agent), to spot spam.</li>
         </ul>
 
         <h2 className={H}>Why</h2>
@@ -55,7 +56,7 @@ export default function PrivacyPage() {
         <p className={P}>
           Under UK GDPR, and similar US state laws, you can ask to see, correct or delete what we hold, or object to how we
           use it. Email <a className="underline underline-offset-4" href={`mailto:${PRIVACY_CONTACT_EMAIL}`}>{PRIVACY_CONTACT_EMAIL}</a>.
-          Every email we send has an unsubscribe link.
+          Every follow-up email has an unsubscribe link, and you can reply to any email to stop them.
         </p>
 
         <p className="mt-12 text-[14px] text-dim">Updated {PRIVACY_UPDATED}.</p>

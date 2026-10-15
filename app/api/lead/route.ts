@@ -35,20 +35,23 @@ export async function POST(request: Request) {
     const store = getStore();
     switch (action) {
       case "audit": {
-        if (!body.id && overLimit("global-audit", "site")) {
+        const sub = v.submission(body);
+        // Reuse a client-sent id only if that lead already exists; new leads always get a server id,
+        // so a script can't dodge the site-wide cap by inventing ids.
+        const known = body.id ? v.leadId(body.id) : null;
+        const id = known && (await store.exists(known)) ? known : crypto.randomUUID();
+        if (id !== known && overLimit("global-audit", "site")) {
           return json({ error: "We're getting a lot of audits right now. Try again in a little while." }, 429);
         }
-        const id = body.id ? v.leadId(body.id) : crypto.randomUUID();
-        const sub = v.submission(body);
         const result = scoreAudit(sub.answers, sub.sport); // never trust a client score
         const attr = v.attribution(body.attribution);
-        const { alreadyAlerted } = await store.saveAudit(id, sub, result, {
+        await store.saveAudit(id, sub, result, {
           attribution: attr,
           userAgent: (request.headers.get("user-agent") ?? "").slice(0, 300),
         });
-        if (!alreadyAlerted) {
-          const sent = await sendLeadAlert(id, sub, result, attr);
-          if (sent) await store.markAlerted(id);
+        // Exactly one request per lead wins the claim, so a resubmit, a race or a failed send never repeats emails.
+        if (await store.claimAlert(id)) {
+          await sendLeadAlert(id, sub, result, attr);
           await sendScoreEmail(id, sub, result);
           await sendSportsEvent("sports.audited", sub.contact, { book_url: bookUrl(id), package: result.pkg });
         }
@@ -58,9 +61,11 @@ export async function POST(request: Request) {
       case "booked": {
         const id = v.leadId(body.id);
         const b = v.booking(body.booking);
+        const before = await store.get(id);
+        if (!before) return json({ error: "Audit not found." }, 404);
         await store.booked(id, b);
-        const lead = await store.get(id);
-        if (lead) await sendSportsEvent("sports.booked", lead, { reschedule_url: rescheduleUrl(b.uid) });
+        // The Cal.com webhook may have got here first; only the first arrival fires the event.
+        if (before.status !== "booked") await sendSportsEvent("sports.booked", before, { reschedule_url: rescheduleUrl(b.uid) });
         return json({ ok: true });
       }
 

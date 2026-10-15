@@ -28,12 +28,22 @@ export function leadId(v: unknown): string {
   return v;
 }
 
-/** "@kai", "instagram.com/kai/?hl=en", "tiktok.com/@kai", "youtube.com/@kai" → "kai". */
+// First path segments that are pages, not profiles (youtube.com/channel/…, instagram.com/stories/…).
+const NOT_PROFILES = new Set(["channel", "c", "user", "p", "reel", "reels", "stories", "explore", "tv", "watch", "shorts", "video"]);
+
+/**
+ * "@kai", "instagram.com/kai/?hl=en", "tiktok.com/@kai", "youtube.com/@kai" → "kai".
+ * Anything else that looks like a link (youtu.be/…, vm.tiktok.com/…, linktr.ee/…, a post or channel URL)
+ * comes back unchanged so the HANDLE check rejects it, instead of storing a fragment like "channel".
+ */
 export function normalizeHandle(raw: string): string {
-  let s = raw.trim();
-  s = s.replace(/^https?:\/\//i, "").replace(/^(www\.|m\.)/i, "");
-  s = s.replace(/^(instagram\.com|tiktok\.com|youtube\.com)\//i, "");
-  s = s.split(/[/?#]/)[0];
+  const s = raw.trim().replace(/^https?:\/\//i, "").replace(/^(www\.|m\.)/i, "");
+  const profile = s.match(/^(?:instagram\.com|tiktok\.com|youtube\.com)\/([^/?#]+)/i);
+  if (profile) {
+    const first = profile[1].replace(/^@/, "");
+    return NOT_PROFILES.has(first.toLowerCase()) ? s : first;
+  }
+  if (s.includes("/")) return s; // a link to some other site
   return s.replace(/^@/, "");
 }
 
