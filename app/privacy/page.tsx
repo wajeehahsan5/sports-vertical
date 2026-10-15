@@ -25,7 +25,7 @@ export default function PrivacyPage() {
         <ul className={`${P} list-disc pl-6`}>
           <li>Your answers to the audit, your sport and your level.</li>
           <li>Your name, email and Instagram handle.</li>
-          <li>If you give them: your TikTok, YouTube, website and WhatsApp number.</li>
+          <li>If you give it: your WhatsApp number.</li>
           <li>Where you&apos;re based (UK, US or elsewhere).</li>
           <li>How you found the page, if the link you used had a referral code or campaign tag in it. Your browser keeps that code for up to 90 days so a later visit still counts.</li>
           <li>Your browser type (the user agent), to spot spam.</li>
@@ -33,7 +33,7 @@ export default function PrivacyPage() {
 
         <h2 className={H}>Why</h2>
         <p className={P}>
-          To show you your score, look at the public profiles you gave us before your call, email you your score and a few
+          To show you your score, look at your public Instagram before your call, email you your score and a few
           short follow-ups about the call, and know which introductions worked.
         </p>
 

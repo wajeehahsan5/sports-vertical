@@ -171,7 +171,7 @@ export const QUESTIONS: AuditQuestion[] = [
 
 /* ── The real-review step ─────────────────────────────────────────────── */
 
-export type FieldKey = "name" | "email" | "instagram" | "tiktok" | "youtube" | "website" | "whatsapp";
+export type FieldKey = "name" | "email" | "instagram" | "whatsapp";
 
 export type Field = {
   key: FieldKey;
@@ -187,9 +187,6 @@ export const REVIEW_FIELDS: Field[] = [
   { key: "name", label: "Your name", placeholder: "Kai Mercer", type: "text", autoComplete: "name", required: true },
   { key: "email", label: "Email", placeholder: "you@email.com", type: "email", autoComplete: "email", inputMode: "email", required: true },
   { key: "instagram", label: "Instagram", placeholder: "@yourhandle", type: "text", autoComplete: "off", required: true },
-  { key: "tiktok", label: "TikTok", placeholder: "@yourhandle", type: "text", autoComplete: "off", required: false },
-  { key: "youtube", label: "YouTube", placeholder: "@yourchannel", type: "text", autoComplete: "off", required: false },
-  { key: "website", label: "Website", placeholder: "yourname.com", type: "url", autoComplete: "url", inputMode: "url", required: false },
   { key: "whatsapp", label: "WhatsApp", placeholder: "+44 7700 900123", type: "tel", autoComplete: "tel", inputMode: "tel", required: false },
 ];
 

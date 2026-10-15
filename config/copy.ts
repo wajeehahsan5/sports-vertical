@@ -39,10 +39,10 @@ export const COPY = {
       content: "Camp, fight week, everyday.",
       home: "Website and media kit.",
     },
-    audit: { title: "Start with the audit", body: "2 minutes, free. See which of the three needs work first." },
+    audit: { title: "Start with the audit", body: "2 minutes, free. See which of the three needs work first.", cta: "Start my free audit" },
   },
   why: {
-    photo: { src: "/img/why.jpg", alt: "A fighter sitting on the gym floor beside his gloves" },
+    photo: { src: "/img/why.jpg", alt: "A fighter in a hood, gloves up, looking into the camera" },
     stats: [
       ["2 min", "to take the audit"],
       ["3", "pillars we score"],
