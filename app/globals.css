@@ -62,10 +62,10 @@ html[data-quiz-open] {
 @layer components {
   .display {
     font-family: var(--font-display-face), system-ui, sans-serif;
-    font-weight: 800;
+    font-weight: 700;
     text-transform: uppercase;
-    line-height: 0.95;
-    letter-spacing: 0.005em;
+    line-height: 1;
+    letter-spacing: 0;
   }
   .eyebrow {
     display: inline-flex;
@@ -92,7 +92,7 @@ html[data-quiz-open] {
     border-radius: var(--radius-card);
   }
   .card-dark {
-    background: var(--ink-2);
+    background: var(--ink);
     border: 1px solid var(--line-dark);
     border-radius: var(--radius-card);
     color: var(--on-dark);

@@ -1,13 +1,34 @@
 import { AuditOverlay } from "@/components/audit/AuditOverlay";
+import { Footer } from "@/components/legal/Footer";
+import { Reveal } from "@/components/motion/Reveal";
+import { BeforeAfter } from "@/components/sections/BeforeAfter";
+import { Faq } from "@/components/sections/Faq";
+import { FinalCta } from "@/components/sections/FinalCta";
+import { Hero } from "@/components/sections/Hero";
+import { HowItWorks } from "@/components/sections/HowItWorks";
+import { Nav } from "@/components/sections/Nav";
+import { Packages } from "@/components/sections/Packages";
+import { WhatWeBuild } from "@/components/sections/WhatWeBuild";
+import { WhyItMatters } from "@/components/sections/WhyItMatters";
 
 export default function Home() {
   return (
-    <main className="mx-auto max-w-[1200px] px-4 py-16">
-      <h1 className="display text-[64px]">Janobi Sports</h1>
-      <a href="#audit" className="btn btn-ink mt-6">
-        Get my free audit
-      </a>
+    <>
+      <Nav />
+      <Reveal>
+        <main>
+          <Hero />
+          <WhatWeBuild />
+          <WhyItMatters />
+          <BeforeAfter />
+          <Packages />
+          <HowItWorks />
+          <Faq />
+          <FinalCta />
+        </main>
+      </Reveal>
+      <Footer />
       <AuditOverlay />
-    </main>
+    </>
   );
 }

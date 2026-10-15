@@ -4,7 +4,7 @@
  */
 :root {
   --paper: #f3f0e8; /* cream bands */
-  --card: #ffffff; /* cards on paper */
+  --card: #faf8f2; /* soft cream cards on paper, as in the reference */
   --ink: #161616; /* type, dark bands */
   --ink-2: #1f1f1f; /* cards on dark bands */
   --mint: #9beaca; /* the loud accent: highlight cards, arrows, selected answers */
@@ -14,7 +14,6 @@
   --line-dark: rgba(255, 255, 255, 0.12);
   --dim: #6b6b66;
   --body: #2a2a28;
-  --device: #0b0b0b; /* phone hardware in the before/after mocks, not a brand colour */
   --on-dark: #edede8;
   --on-dark-dim: #a3a39e;
   --error: #d6452f;
