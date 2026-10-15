@@ -1,0 +1,189 @@
+@import "tailwindcss";
+@import "../styles/tokens.css";
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-mint: var(--mint);
+  --color-mint-deep: var(--mint-deep);
+  --color-magenta: var(--magenta);
+  --color-line: var(--line);
+  --color-line-dark: var(--line-dark);
+  --color-dim: var(--dim);
+  --color-body: var(--body);
+  --color-on-dark: var(--on-dark);
+  --color-on-dark-dim: var(--on-dark-dim);
+  --color-error: var(--error);
+  --color-sand: var(--sand);
+  --font-display: var(--font-display-face);
+  --font-sans: var(--font-body-face);
+}
+
+html {
+  background: var(--paper);
+  color: var(--ink);
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  background: var(--paper);
+  font-family: var(--font-body-face), system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+/* The audit overlay locks the page behind it, and rises in when it opens. */
+html[data-quiz-open] {
+  overflow: hidden;
+}
+@keyframes quiz-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+}
+.quiz-in:not([hidden]) {
+  animation: quiz-in 0.38s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+::selection {
+  background: var(--mint);
+  color: var(--ink);
+}
+:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+@layer components {
+  .display {
+    font-family: var(--font-display-face), system-ui, sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 0.95;
+    letter-spacing: 0.005em;
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .eyebrow::before {
+    content: "«";
+  }
+  .eyebrow::after {
+    content: "»";
+  }
+  .label {
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-card);
+  }
+  .card-dark {
+    background: var(--ink-2);
+    border: 1px solid var(--line-dark);
+    border-radius: var(--radius-card);
+    color: var(--on-dark);
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 48px;
+    padding: 0 1.5rem;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+      background-color 0.15s ease,
+      transform 0.15s ease;
+  }
+  .btn:disabled {
+    cursor: not-allowed;
+    background: var(--sand);
+    color: var(--dim);
+  }
+  .btn-ink {
+    background: var(--ink);
+    color: var(--mint);
+  }
+  .btn-ink:hover {
+    transform: translateY(-1px);
+  }
+  .btn-mint {
+    background: var(--mint);
+    color: var(--ink);
+  }
+  .btn-mint:hover {
+    background: var(--mint-deep);
+  }
+  .btn-light {
+    background: var(--card);
+    color: var(--ink);
+    border: 1px solid var(--line);
+  }
+  .btn-arrow {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    border-radius: 999px;
+    font-size: 18px;
+    background: var(--ink);
+    color: var(--mint);
+  }
+  .field-input {
+    display: block;
+    width: 100%;
+    min-height: 54px;
+    padding: 0 16px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-field);
+    background: var(--card);
+    color: var(--ink);
+    font-size: 17px;
+    outline: none;
+  }
+  .field-input::placeholder {
+    color: var(--dim);
+    opacity: 0.7;
+  }
+  .field-input:focus {
+    border-color: var(--ink);
+    box-shadow: 0 0 0 3px var(--mint);
+  }
+  .field-input[aria-invalid="true"] {
+    border-color: var(--error);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

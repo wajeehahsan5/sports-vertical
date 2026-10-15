@@ -1,0 +1,29 @@
+/*
+ * Janobi Sports — design tokens (reference: janobi-sports/design/reference.webp).
+ * Every colour on the site traces back to this file.
+ */
+:root {
+  --paper: #f3f0e8; /* cream bands */
+  --card: #ffffff; /* cards on paper */
+  --ink: #161616; /* type, dark bands */
+  --ink-2: #1f1f1f; /* cards on dark bands */
+  --mint: #9beaca; /* the loud accent: highlight cards, arrows, selected answers */
+  --mint-deep: #7fe0b9;
+  --magenta: #cc1d9a; /* the one pop card per section, never body text */
+  --line: rgba(22, 22, 22, 0.12);
+  --line-dark: rgba(255, 255, 255, 0.12);
+  --dim: #6b6b66;
+  --body: #2a2a28;
+  --device: #0b0b0b; /* phone hardware in the before/after mocks, not a brand colour */
+  --on-dark: #edede8;
+  --on-dark-dim: #a3a39e;
+  --error: #d6452f;
+
+  --radius-card: 14px;
+  --radius-field: 12px;
+  --content-max: 1200px;
+
+  /* names the Cal.com theme reads */
+  --surface: var(--mint-deep);
+  --sand: #e6e2d8;
+}
