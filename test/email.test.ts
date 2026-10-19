@@ -31,7 +31,7 @@ describe("renderScoreEmail", () => {
     const e = renderScoreEmail(id, sub, r);
     expect(e.html).toContain(`${r.overall}`);
     for (const label of ["Identity", "Content", "Home base"]) expect(e.html).toContain(label);
-    expect(e.html).toContain(`/book?a=${id}`);
+    expect(e.html).toContain(`/book/?a=${id}`);
     expect(e.html + e.subject + e.text).not.toContain("—");
   });
 });

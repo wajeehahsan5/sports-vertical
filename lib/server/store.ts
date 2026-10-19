@@ -28,6 +28,8 @@ export interface LeadStore {
   /** Creates or updates the audit. Never touches status or alerted_at; ref/attribution are set on the first save only. */
   saveAudit(id: string, s: AuditSubmission, r: AuditResult, meta: Meta): Promise<void>;
   exists(id: string): Promise<boolean>;
+  /** How many audits were created since this time (ms). Backs the site-wide daily cap. */
+  countSince(sinceMs: number): Promise<number>;
   /**
    * Atomically claims the one-time alert + score email for this lead. True for exactly one caller,
    * ever, so a resubmit, a race or a failed send never sends twice.
@@ -102,6 +104,15 @@ class SupabaseStore implements LeadStore {
     return Boolean(data);
   }
 
+  async countSince(sinceMs: number) {
+    const { count, error } = await this.db
+      .from(TABLE)
+      .select("id", { count: "exact", head: true })
+      .gte("created_at", new Date(sinceMs).toISOString());
+    if (error) throw error;
+    return count ?? 0;
+  }
+
   async claimAlert(id: string) {
     const now = new Date().toISOString();
     // One UPDATE … WHERE alerted_at IS NULL: Postgres lets exactly one request win it.
@@ -174,6 +185,15 @@ export class LocalStore implements LeadStore {
 
   async exists(id: string) {
     return Boolean(await this.read(id));
+  }
+
+  async countSince(sinceMs: number) {
+    let n = 0;
+    for (const f of await fs.readdir(this.root).catch(() => [] as string[])) {
+      const row = f.endsWith(".json") ? await this.read(f.slice(0, -5)) : null;
+      if (row && Date.parse(String(row.created_at)) >= sinceMs) n++;
+    }
+    return n;
   }
 
   async claimAlert(id: string) {

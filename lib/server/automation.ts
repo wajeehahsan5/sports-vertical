@@ -19,7 +19,7 @@ const API = "https://api.resend.com";
 export const envValue = (v: string | undefined) => v?.trim().replace(/^(["'])(.*)\1$/, "$2") || undefined;
 
 export const firstName =(full: string) => full.trim().split(/\s+/)[0] || "there";
-export const bookUrl = (id: string) => `${SITE}/book?a=${id}`;
+export const bookUrl = (id: string) => `${SITE}/book/?a=${id}`;
 
 export function rescheduleUrl(uid: string) {
   const origin = process.env.NEXT_PUBLIC_CAL_ORIGIN || "https://cal.com";
@@ -77,5 +77,5 @@ export function validOutcomeToken(id: string, token: unknown) {
 
 export function outcomeUrl(id: string) {
   const t = outcomeToken(id);
-  return t ? `${SITE}/call/${id}?k=${t}` : null;
+  return t ? `${SITE}/call/?id=${id}&k=${t}` : null;
 }

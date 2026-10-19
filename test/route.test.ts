@@ -30,7 +30,7 @@ const audit = (extra: Record<string, unknown> = {}) => ({
 });
 
 async function post(body: unknown) {
-  const { POST } = await import("@/app/api/lead/route");
+  const { handleLead: POST } = await import("@/lib/server/handlers");
   ip += 1; // a fresh IP per call keeps the per-IP limits out of the way
   const res = await POST(
     new Request("http://localhost/api/lead", {
@@ -65,7 +65,7 @@ describe("POST /api/lead audit", () => {
 
 describe("POST /api/cal (Cal.com webhook)", () => {
   async function cal(body: unknown, secret = SECRET) {
-    const { POST } = await import("@/app/api/cal/route");
+    const { handleCal: POST } = await import("@/lib/server/handlers");
     const raw = JSON.stringify(body);
     const sig = createHmac("sha256", secret).update(raw).digest("hex");
     const res = await POST(

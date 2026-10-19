@@ -1,0 +1,79 @@
+# Builds the static site and uploads it to Hostinger over FTPS on every push to main.
+# Hostinger runs no Node app for this site: it only serves the files in out/.
+# GitHub pushes them with an FTP login that only reaches the subdomain's folder.
+# Delete that FTP account in hPanel to revoke access.
+#
+# Repo → Settings → Secrets and variables → Actions → New repository secret:
+#   FTP_SERVER    e.g. ftp.janobi.agency (or the IP in hPanel → Files → FTP Accounts)
+#   FTP_USERNAME  the FTP account's full username
+#   FTP_PASSWORD  its password
+# Optional repository VARIABLE (same page, "Variables" tab):
+#   FTP_SERVER_DIR  folder to upload into, relative to the FTP account's home.
+#                   Default "./" (an FTP account whose directory IS the sports subdomain's folder).
+#
+# The backend is the Supabase Edge Function `sports`, deployed separately (see README).
+
+name: Deploy to Hostinger
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # "Run workflow" button for a manual redeploy
+
+concurrency:
+  group: deploy-hostinger
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      FTP_SERVER: ${{ secrets.FTP_SERVER }}
+    steps:
+      - name: Check out the site
+        uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Tests
+        run: npm test
+
+      - name: Edge Function bundle matches the code
+        run: |
+          npm run build:edge
+          git diff --exit-code supabase/functions/sports/index.ts || {
+            echo "::error::supabase/functions/sports/index.ts is stale. Run npm run build:edge, commit, and redeploy the function."
+            exit 1
+          }
+
+      - name: Build static site
+        run: npm run build
+        env:
+          # Public values, baked into the page (no .env.local in CI)
+          NEXT_PUBLIC_CAL_LINK: wajeehfromjanobi/brand-audit
+          NEXT_PUBLIC_CAL_ORIGIN: https://app.cal.com
+
+      - name: Check the FTP secrets are set
+        id: check
+        run: |
+          if [ -z "$FTP_SERVER" ]; then
+            echo "::notice::FTP secrets not set yet, skipping upload. Add FTP_SERVER, FTP_USERNAME and FTP_PASSWORD."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Upload changed files
+        if: steps.check.outputs.skip != 'true'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: ./out/
+          server-dir: ${{ vars.FTP_SERVER_DIR || './' }}

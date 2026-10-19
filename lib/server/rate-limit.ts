@@ -3,9 +3,9 @@ import "server-only";
 /**
  * In-memory sliding-window rate limits for the lead API.
  *
- * Good enough for a single long-running Node process (Hostinger Node.js app).
- * If this ever runs on several instances or serverless, move the counters to
- * Supabase or Upstash — each instance would otherwise keep its own count.
+ * Per server instance (each Supabase Edge Function isolate keeps its own count),
+ * so these are a speed bump. The hard site-wide cap is counted in the database
+ * (handlers.ts, DAILY_CAP).
  */
 const HOUR = 60 * 60 * 1000;
 const DAY = 24 * HOUR;
@@ -15,6 +15,7 @@ const LIMITS = {
   audit: { max: 8, windowMs: HOUR },
   booked: { max: 12, windowMs: HOUR },
   outcome: { max: 30, windowMs: HOUR }, // Wajeeh's "log the call" page
+  lookup: { max: 30, windowMs: HOUR }, // /book and /call loading a lead
   // whole site: caps the inbox if someone rotates IPs
   "global-audit": { max: 300, windowMs: DAY },
 } as const;

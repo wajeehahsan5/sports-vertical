@@ -1,9 +1,11 @@
+import { API_BASE } from "@/config/site";
+
 export type Booking = { uid: string; startTime: string };
 
 export async function postLead<T = { ok: true }>(body: Record<string, unknown>): Promise<T> {
   let res: Response;
   try {
-    res = await fetch("/api/lead", {
+    res = await fetch(`${API_BASE}/lead`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(body),
