@@ -801,10 +801,10 @@ function json(data, status = 200) {
 }
 
 // edge/sports.ts
-var ALLOWED_ORIGINS = /* @__PURE__ */ new Set(["https://sports.janobi.agency", "http://localhost:3230"]);
+var ALLOWED_ORIGIN = /^(https:\/\/sports\.janobi\.agency|http:\/\/(localhost|127\.0\.0\.1|192\.168\.\d{1,3}\.\d{1,3}):\d{2,5})$/;
 function cors(req) {
   const origin = req.headers.get("origin") ?? "";
-  if (!ALLOWED_ORIGINS.has(origin)) return {};
+  if (!ALLOWED_ORIGIN.test(origin)) return {};
   return {
     "access-control-allow-origin": origin,
     "access-control-allow-methods": "POST, OPTIONS",

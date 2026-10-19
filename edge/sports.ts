@@ -12,11 +12,12 @@ import { handleCal, handleLead } from "@/lib/server/handlers";
 
 declare const Deno: { serve(handler: (req: Request) => Response | Promise<Response>): void };
 
-const ALLOWED_ORIGINS = new Set(["https://sports.janobi.agency", "http://localhost:3230"]);
+// The live site, plus local previews of the static build (this PC, or a phone on the same Wi-Fi).
+const ALLOWED_ORIGIN = /^(https:\/\/sports\.janobi\.agency|http:\/\/(localhost|127\.0\.0\.1|192\.168\.\d{1,3}\.\d{1,3}):\d{2,5})$/;
 
 function cors(req: Request): Record<string, string> {
   const origin = req.headers.get("origin") ?? "";
-  if (!ALLOWED_ORIGINS.has(origin)) return {};
+  if (!ALLOWED_ORIGIN.test(origin)) return {};
   return {
     "access-control-allow-origin": origin,
     "access-control-allow-methods": "POST, OPTIONS",
