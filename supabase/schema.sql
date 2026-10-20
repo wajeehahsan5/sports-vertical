@@ -34,6 +34,10 @@ create table if not exists public.sports_audits (
   booked_at     timestamptz
 );
 
+-- Since 30 Oct 2026 Supabase no longer grants Data API access to new public tables.
+-- The server (service role) needs an explicit grant or every write fails with "permission denied".
+grant select, insert, update, delete on public.sports_audits to service_role;
+
 create index if not exists sports_audits_status_idx on public.sports_audits (status, created_at desc);
 create index if not exists sports_audits_ref_idx on public.sports_audits (ref);
 create index if not exists sports_audits_email_idx on public.sports_audits (email);
