@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://sports.janobi.agency"),
   title: "Free Personal Brand Audit for Athletes | Janobi Sports",
   description:
-    "A free 2-minute audit for athletes and fighters. Get your Personal Brand Score now, then we review your real profiles and bring 3 fixes to a 20-minute call.",
+    "A free 2-minute audit for fighters, footballers, cricketers and other athletes. Get your Personal Brand Score now, then we review your real profiles and bring 3 fixes to a 20-minute call.",
   openGraph: {
     title: "Free Personal Brand Audit for Athletes",
     description: "Get your score in 2 minutes. Janobi Sports, UK and US.",

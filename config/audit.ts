@@ -5,7 +5,7 @@ export type Pillar = "identity" | "content" | "home";
 export type PackageId = "weigh-in" | "camp" | "title-run";
 export type Points = 0 | 1 | 2 | 3;
 export type QuestionKey = "q1" | "q2" | "q3" | "q4" | "q5" | "q6" | "q7" | "q8" | "q9";
-export type SportId = "mma" | "boxing" | "muay-thai" | "bjj" | "football" | "other";
+export type SportId = "mma" | "boxing" | "muay-thai" | "bjj" | "football" | "cricket" | "other";
 export type LevelId = "amateur" | "regional" | "national" | "elite";
 export type BasedIn = "uk" | "us" | "elsewhere";
 
@@ -19,6 +19,7 @@ export const SPORTS: { value: SportId; label: string; event: string; events: str
   { value: "muay-thai", label: "Muay Thai / Kickboxing", event: "fight", events: "fights" },
   { value: "bjj", label: "BJJ / Grappling", event: "match", events: "matches" },
   { value: "football", label: "Football", event: "match", events: "matches" },
+  { value: "cricket", label: "Cricket", event: "match", events: "matches" },
   { value: "other", label: "Another sport", event: "event", events: "events" },
 ];
 

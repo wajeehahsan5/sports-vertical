@@ -12,7 +12,7 @@ export const COPY = {
   },
   hero: {
     tag: { place: "UK · US", image: "/img/tag.jpg" },
-    stat: "For fighters, boxers and footballers. Free, 2 minutes.",
+    stat: "For fighters, footballers and cricketers. Free, 2 minutes.",
     h1: "You've earned a bigger name than your feed shows.",
     cta: "Get my free audit",
     ctaLabel: ["Get your free", "brand audit"] as const,
@@ -72,7 +72,7 @@ export const COPY = {
     h2: "Questions athletes ask.",
     items: [
       { q: "Who's Janobi?", a: "A UK-registered creative studio with a global team. We build brands, content and websites. Janobi Sports is the part of the studio that works with athletes." },
-      { q: "Which sports do you work with?", a: "Combat sports first (MMA, boxing, Muay Thai and grappling), plus football and other sports. If you compete, it works." },
+      { q: "Which sports do you work with?", a: "Combat sports first (MMA, boxing, Muay Thai and grappling), plus football, cricket and other sports. If you compete, it works." },
       { q: "Do I need a big following?", a: "No. The audit works at every level, and a strong brand is easier to build before the big fight than after it." },
       { q: "What happens on the call?", a: "We go through your profiles, show you 3 specific fixes and, if you want, what working together looks like. No pressure either way." },
       { q: "How much of my time does it take?", a: "Very little. We plan around your training and fight schedule and ask for short, specific things." },

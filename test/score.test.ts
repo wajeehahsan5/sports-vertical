@@ -73,6 +73,7 @@ describe("scoreAudit", () => {
     expect(scoreAudit(a, "football").findings[0]).toContain("match");
     expect(scoreAudit(a, "mma").findings[0]).toContain("fight");
     expect(scoreAudit(a, "football").findings[0]).not.toContain("{");
+    expect(scoreAudit(a, "cricket").findings[0]).toContain("match");
   });
 
   it("rejects a missing answer", () => {

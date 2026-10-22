@@ -22,6 +22,7 @@ var SPORTS = [
   { value: "muay-thai", label: "Muay Thai / Kickboxing", event: "fight", events: "fights" },
   { value: "bjj", label: "BJJ / Grappling", event: "match", events: "matches" },
   { value: "football", label: "Football", event: "match", events: "matches" },
+  { value: "cricket", label: "Cricket", event: "match", events: "matches" },
   { value: "other", label: "Another sport", event: "event", events: "events" }
 ];
 var LEVELS = [
